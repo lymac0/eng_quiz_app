@@ -156,15 +156,15 @@ class ChangeAvatarState extends State<ChangeAvatar> {
               ),
             ),
           ),
-          BackButtonWidget(onPressed: () async {
+          BackButtonWidget(onPressed: () {
             Navigator.pop(context);
-            await Future.delayed(const Duration(milliseconds: 200));
-            showDialog(
-              context: context,
-              builder: (context) {
-                return const AccountSettings();
-              },
-            );
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showDialog(
+                context: context,
+                builder: (context) => const AccountSettings(),
+              );
+            });
           }),
         ],
       ),
